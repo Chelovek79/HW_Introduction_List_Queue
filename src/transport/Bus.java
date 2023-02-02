@@ -6,7 +6,6 @@ import drivers.DriverD;
 public class Bus<T extends DriverD> extends Transport implements Competing {
 
     enum NumberOfSeats {
-
         EspeciallySmall(0, 10),
         Small(10, 25),
         Average(25, 50),
@@ -40,8 +39,13 @@ public class Bus<T extends DriverD> extends Transport implements Competing {
     private NumberOfSeats numberOfSeats;
     private T driver;
 
-    public Bus(String brand, String model, double engineVolume, String seats, T driver) {
-        super(brand, model);
+    public Bus(String brand,
+               String model,
+               double engineVolume,
+               String seats,
+               T driver,
+               Mechanic mechanic) {
+        super(brand, model, mechanic);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 5.0);
         this.numberOfSeats = NumberOfSeats.valueOf(Check.checkingType(seats));
         this.driver = driver;
@@ -91,5 +95,10 @@ public class Bus<T extends DriverD> extends Transport implements Competing {
     @Override
     public void maxSpeed(int speed) {
         System.out.println("Максимальная скорость - " + speed + " км/ч");
+    }
+
+    @Override
+    public String getFioDriver() {
+        return super.getFioDriver() + driver.getFio();
     }
 }

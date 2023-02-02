@@ -6,7 +6,6 @@ import drivers.DriverC;
 public class Trucks<T extends DriverC> extends Transport implements Competing {
 
     enum LoadCapacity {
-
         N1(0, 3.5f),
         N2(3.5f, 12f),
         N3(12f, 100f),
@@ -42,8 +41,13 @@ public class Trucks<T extends DriverC> extends Transport implements Competing {
     private LoadCapacity loadCapacity;
     private T driver;
 
-    public Trucks(String brand, String model, double engineVolume, String loadCapacity, T driver) {
-        super(brand, model);
+    public Trucks(String brand,
+                  String model,
+                  double engineVolume,
+                  String loadCapacity,
+                  T driver,
+                  Mechanic mechanic) {
+        super(brand, model, mechanic);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 10.0);
         this.loadCapacity = LoadCapacity.valueOf(Check.checkingType(loadCapacity));
         this.driver = driver;
@@ -101,5 +105,10 @@ public class Trucks<T extends DriverC> extends Transport implements Competing {
     @Override
     public void maxSpeed(int speed) {
         System.out.println("Максимальная скорость - " + speed + " км/ч");
+    }
+
+    @Override
+    public String getFioDriver() {
+        return super.getFioDriver() + driver.getFio();
     }
 }

@@ -2,9 +2,9 @@ package transport;
 
 public interface Competing {
 
-    void pit_stop ();
+    void pit_stop();
 
-    void bestTimeLap (String timeLap);
+    void bestTimeLap(String timeLap);
 
-    void maxSpeed (int speed);
+    void maxSpeed(int speed);
 }

@@ -6,16 +6,20 @@ public class Driver {
     private boolean driversLicense;
     private double workExperience;
 
-
     public Driver(String fio, boolean driversLicense, double workExperience) {
         this.fio = fio;
         this.driversLicense = driversLicense;
         this.workExperience = workExperience;
     }
 
-    public void startDriving() {}
-    public void stopDriving() {}
-    public void refuel() {}
+    public void startDriving() {
+    }
+
+    public void stopDriving() {
+    }
+
+    public void refuel() {
+    }
 
     public String getFio() {
         return fio;

@@ -33,8 +33,13 @@ public class PassengerCar<T extends DriverB> extends Transport implements Compet
     CarBody carBody;
     private T driver;
 
-    public PassengerCar(String brand, String model, double engineVolume, CarBody carBody, T driver) {
-        super(brand, model);
+    public PassengerCar(String brand,
+                        String model,
+                        double engineVolume,
+                        CarBody carBody,
+                        T driver,
+                        Mechanic mechanic) {
+        super(brand, model, mechanic);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 1.5);
         this.carBody = carBody;
         this.driver = driver;
@@ -92,5 +97,10 @@ public class PassengerCar<T extends DriverB> extends Transport implements Compet
     @Override
     public void maxSpeed(int speed) {
         System.out.println("Максимальная скорость - " + speed + " км/ч");
+    }
+
+    @Override
+    public String getFioDriver() {
+        return super.getFioDriver() + driver.getFio();
     }
 }

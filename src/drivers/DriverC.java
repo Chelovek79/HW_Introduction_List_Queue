@@ -23,6 +23,6 @@ public class DriverC extends Driver {
 
     @Override
     public String toString() {
-        return super.toString() + " Категория - 'C'." ;
+        return super.toString() + " Категория - 'C'.";
     }
 }

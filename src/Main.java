@@ -32,8 +32,12 @@ public class Main {
             transport.testingAvto(1, "C");
             transport.testingAvto(3, "D");
         } catch (TransportTypeException e) {
-            System.err.println(e + "\n");
+//            System.err.println(e + "\n");
         }
-        System.out.println("Как-то так... продолжаем...");
+
+        transport.creationtListOfCompetition();
+        System.out.println(" ");
+        transport.repair(1);
+        transport.doingTo(4);
     }
 }
