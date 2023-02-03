@@ -2,9 +2,8 @@ package transport;
 
 import check.TransportTypeException;
 import drivers.DbDrivers;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 
 public class DbTransport {
 
@@ -39,11 +38,13 @@ public class DbTransport {
 
     List<Transport> participants = new ArrayList<>();
 
-    public void creationtListOfCompetition() {
+    {
         participants.addAll(Arrays.asList(smallcar).subList(0, 4));
         participants.addAll(Arrays.asList(trucks).subList(0, 4));
         participants.addAll(Arrays.asList(buses).subList(0, 4));
+    }
 
+    public void creationtListOfCompetition() {
         System.out.println("\n Участники соревнований: \n");
         for (Transport participant : participants) {
             System.out.println(participant.getBrand() + " " + participant.getModel() + ". " +
@@ -59,6 +60,10 @@ public class DbTransport {
     public void doingTo(int i) {
         System.out.println("Авто - " + participants.get(i).getBrand() + ". " + participants.get(i).mechanicToDoing() +
                 " " + participants.get(i).getMechanic());
+    }
+
+    public Boolean enteringCarToSto (int i) {
+        return !participants.get(i).getId().equals("Bus");
     }
 
     public void getDriverCarName(int i, String classCar) {

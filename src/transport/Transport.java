@@ -10,11 +10,13 @@ public abstract class Transport<T extends Mechanic> {
     private final String brand;
     private final String model;
     private final T mechanic;
+    private final String id;
 
     public Transport(String brand, String model, T mechanic) {
         this.brand = Check.checkingString(brand, "Самоделка");
         this.model = Check.checkingString(model, "1");
         this.mechanic = mechanic;
+        this.id = "";
     }
 
     static List<Mechanic> mechanics = new ArrayList<>(Arrays.asList(
@@ -51,6 +53,10 @@ public abstract class Transport<T extends Mechanic> {
 
     public String getModel() {
         return model;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public static void startMoving() {

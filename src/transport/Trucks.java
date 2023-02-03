@@ -40,6 +40,7 @@ public class Trucks<T extends DriverC> extends Transport implements Competing {
     private double engineVolume;
     private LoadCapacity loadCapacity;
     private T driver;
+    private final String id = "Trucks";
 
     public Trucks(String brand,
                   String model,
@@ -59,6 +60,10 @@ public class Trucks<T extends DriverC> extends Transport implements Competing {
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 10.0);
+    }
+
+    public String getId() {
+        return id;
     }
 
     public LoadCapacity getLoadCapacity() {

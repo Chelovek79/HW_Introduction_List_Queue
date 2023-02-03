@@ -38,6 +38,7 @@ public class Bus<T extends DriverD> extends Transport implements Competing {
     private double engineVolume;
     private NumberOfSeats numberOfSeats;
     private T driver;
+    private final String id = "Bus";
 
     public Bus(String brand,
                String model,
@@ -57,6 +58,11 @@ public class Bus<T extends DriverD> extends Transport implements Competing {
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 5.0);
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     public T getDriver() {

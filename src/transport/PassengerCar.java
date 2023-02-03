@@ -32,6 +32,7 @@ public class PassengerCar<T extends DriverB> extends Transport implements Compet
     private double engineVolume;
     CarBody carBody;
     private T driver;
+    private final String id = "PassengerCar";
 
     public PassengerCar(String brand,
                         String model,
@@ -51,6 +52,10 @@ public class PassengerCar<T extends DriverB> extends Transport implements Compet
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 1.5);
+    }
+
+    public String getId() {
+        return id;
     }
 
     public T getDriver() {
