@@ -5,38 +5,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class Transport<T extends Mechanic> {
-
+    public abstract class Transport {
     private final String brand;
     private final String model;
-    private final T mechanic;
+    private final Mechanic mechanic;
     private final String id;
 
-    public Transport(String brand, String model, T mechanic) {
+        public Transport(String brand, String model) {
         this.brand = Check.checkingString(brand, "Самоделка");
         this.model = Check.checkingString(model, "1");
-        this.mechanic = mechanic;
+        this.mechanic = (Mechanic) mechanics.get(RndMechanic());
         this.id = "";
     }
 
-    static List<Mechanic> mechanics = new ArrayList<>(Arrays.asList(
+    List<Mechanic> mechanics = new ArrayList<>(Arrays.asList(
             new Mechanic("Cидоров Иван", "Таксопарк №3"),
             new Mechanic("Фролов Никита", "Гаражный кооператив 'Орбита'"),
             new Mechanic("Север Илья", "на все руки ...")));
 
-    public static void addingMechanics(String name, String company) {
+    public void addingMechanics(String name, String company) {
         Mechanic newMechanic = new Mechanic();
         newMechanic.setMechanicName(name);
         newMechanic.setCompany(company);
         mechanics.add(newMechanic);
     }
 
-    public static int RndMechanic() {
+    public int RndMechanic() {
         return (int) (Math.random() * (mechanics.size()));
-    }
-
-    public String getMechanic() {
-        return mechanic.toString();
     }
 
     public String mechanicRepairCar() {
@@ -78,5 +73,9 @@ public abstract class Transport<T extends Mechanic> {
 
     public String getFioDriver() {
         return "Водитель ";
+    }
+
+    public Mechanic getMechanic() {
+        return mechanic;
     }
 }

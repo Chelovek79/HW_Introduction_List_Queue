@@ -44,9 +44,8 @@ public class Bus<T extends DriverD> extends Transport implements Competing {
                String model,
                double engineVolume,
                String seats,
-               T driver,
-               Mechanic mechanic) {
-        super(brand, model, mechanic);
+               T driver) {
+        super(brand, model);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 5.0);
         this.numberOfSeats = NumberOfSeats.valueOf(Check.checkingType(seats));
         this.driver = driver;

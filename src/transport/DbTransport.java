@@ -2,39 +2,27 @@ package transport;
 
 import check.TransportTypeException;
 import drivers.DbDrivers;
-
 import java.util.*;
 
 public class DbTransport {
 
     DbDrivers dbDrivers = new DbDrivers();
 
-    PassengerCar<?>[] smallcar = {new PassengerCar<>("Toyota", "Chaser", 3.0,
-            PassengerCar.CarBody.Sedan, dbDrivers.getDriverB(0), Transport.mechanics.get(Transport.RndMechanic())),
-            new PassengerCar<>("BMW", "750iL", 5.4,
-                    PassengerCar.CarBody.Sedan, dbDrivers.getDriverB(2), Transport.mechanics.get(Transport.RndMechanic())),
-            new PassengerCar<>(" ", "Калина", 1.5,
-                    PassengerCar.CarBody.NULL, dbDrivers.getDriverB(1), Transport.mechanics.get(Transport.RndMechanic())),
-            new PassengerCar<>("ЗАЗ", "1.2 MT 968M", 1.2,
-                    PassengerCar.CarBody.OffRoad, dbDrivers.getDriverB(0), Transport.mechanics.get(Transport.RndMechanic()))};
+    PassengerCar<?>[] smallcar = {new PassengerCar<>("Toyota", "Chaser", 3.0, PassengerCar.CarBody.Sedan, "B"),
+            new PassengerCar<>("BMW", "750iL", 5.4, PassengerCar.CarBody.Sedan, "B"),
+            new PassengerCar<>(" ", "Калина", 1.5, PassengerCar.CarBody.NULL, "B"),
+            new PassengerCar<>("ЗАЗ", "1.2 MT 968M", 1.2, PassengerCar.CarBody.OffRoad, "B")};
 
     Trucks<?>[] trucks = {new Trucks<>("КамАЗ", "43118", 10.85, "N3",
-            dbDrivers.getDriverC(1), Transport.mechanics.get(Transport.RndMechanic())),
-            new Trucks<>("ЗИЛ", "131", 6.96, null,
-                    dbDrivers.getDriverC(0), Transport.mechanics.get(Transport.RndMechanic())),
-            new Trucks<>("Урал", null, 6.6, "N2",
-                    dbDrivers.getDriverC(2), Transport.mechanics.get(Transport.RndMechanic())),
-            new Trucks<>("ГАЗ", "66", 0, "N1",
-                    dbDrivers.getDriverC(1), Transport.mechanics.get(Transport.RndMechanic()))};
+            dbDrivers.getDriverC(1)),
+            new Trucks<>("ЗИЛ", "131", 6.96, null, dbDrivers.getDriverC(0)),
+            new Trucks<>("Урал", null, 6.6, "N2", dbDrivers.getDriverC(2)),
+            new Trucks<>("ГАЗ", "66", 0, "N1", dbDrivers.getDriverC(1))};
 
-    Bus<?>[] buses = {new Bus<>("Ikarus", "250 SL", 10.4, "Large",
-            dbDrivers.getDriverD(1), Transport.mechanics.get(Transport.RndMechanic())),
-            new Bus<>("ЛиАЗ", "677", 6.96, null,
-                    dbDrivers.getDriverD(0), Transport.mechanics.get(Transport.RndMechanic())),
-            new Bus<>("ЛАЗ", "695Н", 6.0, "Average",
-                    dbDrivers.getDriverD(2), Transport.mechanics.get(Transport.RndMechanic())),
-            new Bus<>("VolgaBus", "Серпантин-10", 8.4, "Average",
-                    dbDrivers.getDriverD(2), Transport.mechanics.get(Transport.RndMechanic()))};
+    Bus<?>[] buses = {new Bus<>("Ikarus", "250 SL", 10.4, "Large", dbDrivers.getDriverD(1)),
+            new Bus<>("ЛиАЗ", "677", 6.96, null, dbDrivers.getDriverD(0)),
+            new Bus<>("ЛАЗ", "695Н", 6.0, "Average", dbDrivers.getDriverD(2)),
+            new Bus<>("VolgaBus", "Серпантин-10", 8.4, "Average", dbDrivers.getDriverD(2))};
 
     List<Transport> participants = new ArrayList<>();
 
@@ -69,7 +57,7 @@ public class DbTransport {
     public void getDriverCarName(int i, String classCar) {
         switch (classCar) {
             case "B":
-                System.out.println("Водитель " + dbDrivers.getNameDriverB(i) + " управляет автомобилем " + smallcar[i].getBrand()
+                System.out.println(smallcar[i].getFioDriver() + " управляет автомобилем " + smallcar[i].getBrand()
                         + " " + smallcar[i].getModel() + " и будет участвовать в заезде 'легковых машин'.");
                 break;
             case "C":

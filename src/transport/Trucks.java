@@ -46,9 +46,8 @@ public class Trucks<T extends DriverC> extends Transport implements Competing {
                   String model,
                   double engineVolume,
                   String loadCapacity,
-                  T driver,
-                  Mechanic mechanic) {
-        super(brand, model, mechanic);
+                  T driver) {
+        super(brand, model);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 10.0);
         this.loadCapacity = LoadCapacity.valueOf(Check.checkingType(loadCapacity));
         this.driver = driver;
