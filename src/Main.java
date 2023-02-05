@@ -1,3 +1,4 @@
+import check.EnteringNumberToSto;
 import check.TransportTypeException;
 import drivers.DbDrivers;
 import transport.DbTransport;
@@ -10,7 +11,7 @@ public class Main {
 
         DbTransport transport = new DbTransport();
         DbDrivers drivers = new DbDrivers();
-        Sto s = new Sto();
+        Sto stoDepartment = new Sto();
 
         transport.getDriverCarName(0, "C"); // Общие сведения и готовность;
         transport.getDriverCarName(2, "D");
@@ -44,9 +45,14 @@ public class Main {
         transport.doingTo(4);                      // "ТО" произведено;
         System.out.println(" ");
 
-        s.addingToSto();                              // Добавляем в очередь на "ТО";
+        try {                                         // Добавляем в очередь на "ТО";
+            stoDepartment.addingToSto();
+        } catch (EnteringNumberToSto e) {
+            System.err.println(e + "\n");
+        }
+
         System.out.println(" ");
 
-        s.testingOnSto();                             // Проходим "ТО" с удалением из списка;
+        stoDepartment.testingOnSto();                 // Проходим "ТО" с удалением из списка;
     }
 }

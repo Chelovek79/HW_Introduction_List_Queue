@@ -1,9 +1,5 @@
 package check;
 
-import drivers.DbDrivers;
-import drivers.DriverB;
-import transport.PassengerCar;
-
 public class Check {
 
     public static String checkingString(String value, String otherValue) {
