@@ -12,13 +12,13 @@ public class Sto {
     Queue<Transport> sto = new LinkedList<>();
 
     public void addingToSto() throws EnteringNumberToSto {
-        DbTransport a = new DbTransport();
+        DbTransport car = new DbTransport();
         int countCarAddSto = 0;
         System.out.println("Укажите из списка какой автотранспорт требует прохождения 'ТО'.");
-        for (int i = 0; i < a.participants.size(); i++) {
-            if (a.enteringCarToSto(i)) {
+        for (int i = 0; i < car.participants.size(); i++) {
+            if (car.enteringCarToSto(i)) {
                 countCarAddSto++;
-                System.out.println((i + 1) + ". " + a.participants.get(i).getBrand() + " " + a.participants.get(i).getModel());
+                System.out.println((i + 1) + ". " + car.participants.get(i).getBrand() + " " + car.participants.get(i).getModel());
             }
         }
         System.out.println("(укажите номера интересующей Вас техники без пробелов и запятых)");
@@ -40,7 +40,7 @@ public class Sto {
         }
         int sizequeueCars = queueCars.size();
         for (int i = 0; i < sizequeueCars; i++) {
-            sto.offer(a.participants.get(queueCars.pollFirst() - 1));
+            sto.offer(car.participants.get(queueCars.pollFirst() - 1));
         }
     }
 
@@ -49,7 +49,7 @@ public class Sto {
         for (int i = 0; i < sizeListSto; i++) {
             System.out.println(sto.element().getBrand() + " " + sto.element().getModel() +
                     " - документы о пройденном 'ТО' готовы.");
-            sto.remove();
+            sto.poll();
         }
     }
 }
