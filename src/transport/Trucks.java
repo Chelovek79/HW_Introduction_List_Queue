@@ -1,12 +1,12 @@
 package transport;
 
 import check.Check;
+import drivers.DbDrivers;
 import drivers.DriverC;
 
 public class Trucks<T extends DriverC> extends Transport implements Competing {
 
     enum LoadCapacity {
-
         N1(0, 3.5f),
         N2(3.5f, 12f),
         N3(12f, 100f),
@@ -41,12 +41,26 @@ public class Trucks<T extends DriverC> extends Transport implements Competing {
     private double engineVolume;
     private LoadCapacity loadCapacity;
     private T driver;
+    private final String id = "Trucks";
 
-    public Trucks(String brand, String model, double engineVolume, String loadCapacity, T driver) {
-        super(brand, model);
+    public Trucks(String brand,
+                  String model,
+                  double engineVolume,
+                  String loadCapacity,
+                  String category) {
+        super(brand, model, category);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 10.0);
         this.loadCapacity = LoadCapacity.valueOf(Check.checkingType(loadCapacity));
-        this.driver = driver;
+        this.driver = (T) setDriverC(category);
+    }
+
+    public DriverC setDriverC(String category) {
+        DbDrivers driverC = new DbDrivers();
+        if (category == null || category.isBlank()) {
+            return driverC.getDriverC(0);
+        } else {
+            return driverC.getDriverC((int) (Math.random() * 3));
+        }
     }
 
     public double getEngineVolume() {
@@ -55,6 +69,10 @@ public class Trucks<T extends DriverC> extends Transport implements Competing {
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 10.0);
+    }
+
+    public String getId() {
+        return id;
     }
 
     public LoadCapacity getLoadCapacity() {
@@ -101,5 +119,10 @@ public class Trucks<T extends DriverC> extends Transport implements Competing {
     @Override
     public void maxSpeed(int speed) {
         System.out.println("Максимальная скорость - " + speed + " км/ч");
+    }
+
+    @Override
+    public String getFioDriver() {
+        return super.getFioDriver() + driver.getFio();
     }
 }

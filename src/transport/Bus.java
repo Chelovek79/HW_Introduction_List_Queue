@@ -1,12 +1,12 @@
 package transport;
 
 import check.Check;
+import drivers.DbDrivers;
 import drivers.DriverD;
 
 public class Bus<T extends DriverD> extends Transport implements Competing {
 
     enum NumberOfSeats {
-
         EspeciallySmall(0, 10),
         Small(10, 25),
         Average(25, 50),
@@ -39,12 +39,26 @@ public class Bus<T extends DriverD> extends Transport implements Competing {
     private double engineVolume;
     private NumberOfSeats numberOfSeats;
     private T driver;
+    private final String id = "Bus";
 
-    public Bus(String brand, String model, double engineVolume, String seats, T driver) {
-        super(brand, model);
+    public Bus(String brand,
+               String model,
+               double engineVolume,
+               String seats,
+               String category) {
+        super(brand, model, category);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 5.0);
         this.numberOfSeats = NumberOfSeats.valueOf(Check.checkingType(seats));
-        this.driver = driver;
+        this.driver = (T) setDriverD(category);
+    }
+
+    public DriverD setDriverD(String category) {
+        DbDrivers driverD = new DbDrivers();
+        if (category == null || category.isBlank()) {
+            return driverD.getDriverD(0);
+        } else {
+            return driverD.getDriverD((int) (Math.random() * 3));
+        }
     }
 
     public double getEngineVolume() {
@@ -53,6 +67,11 @@ public class Bus<T extends DriverD> extends Transport implements Competing {
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 5.0);
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     public T getDriver() {
@@ -91,5 +110,10 @@ public class Bus<T extends DriverD> extends Transport implements Competing {
     @Override
     public void maxSpeed(int speed) {
         System.out.println("Максимальная скорость - " + speed + " км/ч");
+    }
+
+    @Override
+    public String getFioDriver() {
+        return super.getFioDriver() + driver.getFio();
     }
 }

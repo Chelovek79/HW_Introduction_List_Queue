@@ -1,6 +1,7 @@
 package transport;
 
 import check.Check;
+import drivers.DbDrivers;
 import drivers.DriverB;
 
 public class PassengerCar<T extends DriverB> extends Transport implements Competing {
@@ -32,12 +33,17 @@ public class PassengerCar<T extends DriverB> extends Transport implements Compet
     private double engineVolume;
     CarBody carBody;
     private T driver;
+    private final String id = "PassengerCar";
 
-    public PassengerCar(String brand, String model, double engineVolume, CarBody carBody, T driver) {
-        super(brand, model);
+    public PassengerCar(String brand,
+                        String model,
+                        double engineVolume,
+                        CarBody carBody,
+                        String category) {
+        super(brand, model, category);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 1.5);
         this.carBody = carBody;
-        this.driver = driver;
+        this.driver = (T) setDriverB(category);
     }
 
     public double getEngineVolume() {
@@ -46,6 +52,19 @@ public class PassengerCar<T extends DriverB> extends Transport implements Compet
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 1.5);
+    }
+
+    public DriverB setDriverB(String category) {
+        DbDrivers driverB = new DbDrivers();
+        if (category == null || category.isBlank()) {
+            return driverB.getDriverB(0);
+        } else {
+            return driverB.getDriverB((int) (Math.random() * 3));
+        }
+    }
+
+    public String getId() {
+        return id;
     }
 
     public T getDriver() {
@@ -92,5 +111,10 @@ public class PassengerCar<T extends DriverB> extends Transport implements Compet
     @Override
     public void maxSpeed(int speed) {
         System.out.println("Максимальная скорость - " + speed + " км/ч");
+    }
+
+    @Override
+    public String getFioDriver() {
+        return super.getFioDriver() + driver.getFio();
     }
 }

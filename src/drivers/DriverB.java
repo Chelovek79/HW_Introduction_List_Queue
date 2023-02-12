@@ -2,7 +2,7 @@ package drivers;
 
 public class DriverB extends Driver {
 
-    public DriverB (String fio, boolean driversLicense, double workExperience) {
+    public DriverB(String fio, boolean driversLicense, double workExperience) {
         super(fio, driversLicense, workExperience);
     }
 
@@ -23,8 +23,7 @@ public class DriverB extends Driver {
 
     @Override
     public String toString() {
-        return super.toString() + " Категория - 'B'." ;
+        return super.toString() + " Категория - 'B'.";
     }
-
 
 }

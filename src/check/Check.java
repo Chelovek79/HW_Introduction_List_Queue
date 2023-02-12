@@ -9,6 +9,7 @@ public class Check {
             return value;
         }
     }
+
     public static double checkingEngineVolume(double value, double otherValue) {
         if (value <= 0) {
             return otherValue;
@@ -16,11 +17,23 @@ public class Check {
             return value;
         }
     }
+
     public static String checkingType(String type) {
         if (type == null || type.isBlank()) {
             return "NULL";
         } else {
             return type;
         }
+    }
+
+    public static Boolean testAvtoToSto(String category) {
+        switch (category) {
+            case "B":
+            case "C":
+                return true;
+            case "D":
+                return false;
+        }
+        return null;
     }
 }
