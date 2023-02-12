@@ -9,16 +9,22 @@ import java.util.List;
     private final String brand;
     private final String model;
     private final Mechanic mechanic;
+    private final String category;
     private final String id;
 
-        public Transport(String brand, String model) {
+        public Transport(String brand, String model, String category) {
         this.brand = Check.checkingString(brand, "Самоделка");
         this.model = Check.checkingString(model, "1");
-        this.mechanic = (Mechanic) mechanics.get(RndMechanic());
+        this.mechanic = mechanics.get(RndMechanic());
+        this.category = category;
         this.id = "";
     }
 
-    List<Mechanic> mechanics = new ArrayList<>(Arrays.asList(
+        public String getCategory() {
+            return category;
+        }
+
+        List<Mechanic> mechanics = new ArrayList<>(Arrays.asList(
             new Mechanic("Cидоров Иван", "Таксопарк №3"),
             new Mechanic("Фролов Никита", "Гаражный кооператив 'Орбита'"),
             new Mechanic("Север Илья", "на все руки ...")));

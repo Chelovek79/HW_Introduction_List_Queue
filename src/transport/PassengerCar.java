@@ -40,7 +40,7 @@ public class PassengerCar<T extends DriverB> extends Transport implements Compet
                         double engineVolume,
                         CarBody carBody,
                         String category) {
-        super(brand, model);
+        super(brand, model, category);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 1.5);
         this.carBody = carBody;
         this.driver = (T) setDriverB(category);

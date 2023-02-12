@@ -1,8 +1,7 @@
 package transport;
 
-import check.EnteringNumberToSto;
-
 import java.util.*;
+import static check.Check.*;
 
 public class Sto {
 
@@ -10,46 +9,28 @@ public class Sto {
     }
 
     Queue<Transport> sto = new LinkedList<>();
+    DbTransport car = new DbTransport();
+    int numberTestOnSto = 0;
 
-    public void addingToSto() throws EnteringNumberToSto {
-        DbTransport car = new DbTransport();
-        int countCarAddSto = 0;
-        System.out.println("Укажите из списка какой автотранспорт требует прохождения 'ТО'.");
-        for (int i = 0; i < car.participants.size(); i++) {
-            if (car.enteringCarToSto(i)) {
-                countCarAddSto++;
-                System.out.println((i + 1) + ". " + car.participants.get(i).getBrand() + " " + car.participants.get(i).getModel());
-            }
-        }
-        System.out.println("(укажите номера интересующей Вас техники без пробелов и запятых)");
-        Scanner in = new Scanner(System.in);
-        Deque<Integer> queueCars = new ArrayDeque<>();
-        if (in.hasNextInt()) {
-            int numCars = in.nextInt();
-            while (numCars > 0) {
-                int number = numCars % 10;
-                if (number <= countCarAddSto) {
-                    queueCars.addFirst(number);
-                    numCars = numCars / 10;
-                } else {
-                    throw new EnteringNumberToSto("Ошибка. Указан номер несуществующего транспорта...");
-                }
-            }
+    public void addingToSto(int numberCar) {
+        if (testAvtoToSto(car.participants.get(numberCar).getCategory())) {
+            sto.offer(car.participants.get(numberCar));
+            System.out.println("Автообиль - " + car.participants.get(numberCar).getBrand() + " " + car.participants.get(numberCar).getModel() +
+                    " добавлен на прохождение 'ТО'.");
         } else {
-            throw new EnteringNumberToSto("Ошибка ввода номеров траспорта...");
-        }
-        int sizequeueCars = queueCars.size();
-        for (int i = 0; i < sizequeueCars; i++) {
-            sto.offer(car.participants.get(queueCars.pollFirst() - 1));
+            System.out.println("Автобусы не проходят 'ТО'");
         }
     }
 
     public void testingOnSto() {
-        int sizeListSto = sto.size();
-        for (int i = 0; i < sizeListSto; i++) {
-            System.out.println(sto.element().getBrand() + " " + sto.element().getModel() +
-                    " - документы о пройденном 'ТО' готовы.");
+        if (sto.size() != 0) {
+            System.out.println(sto.element().passDiagnostics());
             sto.poll();
+        } else {
+            numberTestOnSto++;
+            if (numberTestOnSto == 1) {
+                System.out.println("Все автомобили прошли 'ТО'. Список автомобилей пуст.");
+            } else System.out.print("");
         }
     }
 }

@@ -1,6 +1,7 @@
 package transport;
 
 import check.Check;
+import drivers.DbDrivers;
 import drivers.DriverD;
 
 public class Bus<T extends DriverD> extends Transport implements Competing {
@@ -44,11 +45,20 @@ public class Bus<T extends DriverD> extends Transport implements Competing {
                String model,
                double engineVolume,
                String seats,
-               T driver) {
-        super(brand, model);
+               String category) {
+        super(brand, model, category);
         this.engineVolume = Check.checkingEngineVolume(engineVolume, 5.0);
         this.numberOfSeats = NumberOfSeats.valueOf(Check.checkingType(seats));
-        this.driver = driver;
+        this.driver = (T) setDriverD(category);
+    }
+
+    public DriverD setDriverD(String category) {
+        DbDrivers driverD = new DbDrivers();
+        if (category == null || category.isBlank()) {
+            return driverD.getDriverD(0);
+        } else {
+            return driverD.getDriverD((int) (Math.random() * 3));
+        }
     }
 
     public double getEngineVolume() {
